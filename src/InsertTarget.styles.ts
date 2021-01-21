@@ -1,7 +1,6 @@
 import React from "react";
 
 namespace NormalStyles {
-
   export const insertTarget: React.CSSProperties = {
     boxSizing: "border-box",
     width: "100%",
@@ -23,8 +22,7 @@ namespace NormalStyles {
     display: "flex",
   };
 
-  export const insertTargetDropping: React.CSSProperties = {
-  };
+  export const insertTargetDropping: React.CSSProperties = {};
 
   export const insertTargetMarkerDropping: React.CSSProperties = {
     boxSizing: "border-box",
@@ -34,17 +32,14 @@ namespace NormalStyles {
     background: "linear-gradient(90deg, gray, white)",
     alignSelf: "center",
   };
-
 }
 
 namespace DebugStyles {
-
   export const insertTarget: React.CSSProperties = {
     opacity: 0.5,
   };
 
-  export const insertTargetCanDrop: React.CSSProperties = {
-  };
+  export const insertTargetCanDrop: React.CSSProperties = {};
 
   export const insertTargetDropping: React.CSSProperties = {
     opacity: 0.9,
@@ -57,13 +52,11 @@ namespace DebugStyles {
   export const insertAfterTarget: React.CSSProperties = {
     backgroundColor: "#ffddff",
   };
-
 }
 
 const isDebug = false;
 
 export namespace Styles {
-
   export const insertBeforeTarget = Object.assign(
     {},
     NormalStyles.insertTarget,

@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"), require("react-dnd"), require("immutable"), require("classnames"));
+		module.exports = factory(require("react"), require("react-dnd"), require("classnames"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react", "react-dnd", "immutable", "classnames"], factory);
+		define(["react", "react-dnd", "classnames"], factory);
 	else if(typeof exports === 'object')
-		exports["react-dnd-treeview"] = factory(require("react"), require("react-dnd"), require("immutable"), require("classnames"));
+		exports["react-dnd-treeview"] = factory(require("react"), require("react-dnd"), require("classnames"));
 	else
-		root["react-dnd-treeview"] = factory(root["React"], root["react-dnd"], root["Immutable"], root["classnames"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_8__, __WEBPACK_EXTERNAL_MODULE_9__) {
+		root["react-dnd-treeview"] = factory(root["React"], root["react-dnd"], root["classnames"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_8__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -52,21 +52,21 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	module.exports = __webpack_require__(1);
 
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	      value: true
+	  value: true
 	});
-	exports.TreeView = undefined;
+	exports.TreeView = TreeView;
 	
 	var _react = __webpack_require__(2);
 	
@@ -78,30 +78,33 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TreeView = exports.TreeView = function TreeView(props) {
-	      return _react2.default.createElement(
-	            "div",
-	            { className: props.classNames.treeView },
-	            _react2.default.createElement(_Node.TreeViewItemList, { parentNode: null, nodes: props.rootNodes, renderNode: props.renderNode, classNames: props.classNames, onMoveNode: props.onMoveNode })
-	      );
-	};
+	function TreeView(props) {
+	  return _react2.default.createElement(
+	    "div",
+	    { className: props.classNames.treeView },
+	    _react2.default.createElement(_Node.TreeViewItemList, { parentNode: null, nodes: props.rootNodes, renderNode: props.renderNode, classNames: props.classNames, onMoveNode: props.onMoveNode })
+	  );
+	}
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.DroppableTreeViewInsertTarget = undefined;
+	
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	
+	exports.DroppableTreeViewInsertTarget = DroppableTreeViewInsertTarget;
 	
 	var _react = __webpack_require__(2);
 	
@@ -111,21 +114,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _DraggedNode = __webpack_require__(5);
 	
-	var _InsertTargetStyles = __webpack_require__(6);
+	var _InsertTarget = __webpack_require__(6);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var TreeViewInsertTarget = function TreeViewInsertTarget(props) {
-	    return props.connectDropTarget(_react2.default.createElement(
-	        "div",
-	        { style: Object.assign({}, props.insertBefore ? _InsertTargetStyles.Styles.insertBeforeTarget : _InsertTargetStyles.Styles.insertAfterTarget, props.canDrop ? _InsertTargetStyles.Styles.insertTargetCanDrop : {}, props.isDropping ? _InsertTargetStyles.Styles.insertTargetDropping : {}) },
-	        _react2.default.createElement("div", { style: props.isDropping ? _InsertTargetStyles.Styles.insertTargetMarkerDropping : {} })
-	    ));
+	var handleCanDrop = function handleCanDrop(item, _monitor, props) {
+	    return !(props.parentNode === item.parentNode && (props.parentChildIndex === item.parentChildIndex || props.parentChildIndex === item.parentChildIndex + 1)) && !item.allSourceIDs.has(props.parentNode ? props.parentNode.id : null);
 	};
-	var handleCanDrop = function handleCanDrop(props, monitor, item) {
-	    return !(props.parentNode === item.parentNode && (props.parentChildIndex === item.parentChildIndex || props.parentChildIndex === item.parentChildIndex + 1)) && !item.allSourceIDs.contains(props.parentNode ? props.parentNode.id : null);
-	};
-	var handleDrop = function handleDrop(props, monitor, component, item) {
+	var handleDrop = function handleDrop(item, _monitor, props) {
 	    return props.onMoveNode({
 	        oldParentNode: item.parentNode,
 	        oldParentChildIndex: item.parentChildIndex,
@@ -139,33 +135,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	        parentChildIndex: props.parentChildIndex
 	    };
 	};
-	var nodeTarget = {
-	    drop: function drop(props, monitor, component) {
-	        return monitor.didDrop() ? undefined // some child already handled drop
-	        : handleDrop(props, monitor, component, monitor.getItem());
-	    },
-	    canDrop: function canDrop(props, monitor) {
-	        return handleCanDrop(props, monitor, monitor.getItem());
-	    }
-	};
-	var collectNodeDropProps = function collectNodeDropProps(connect, monitor) {
+	var collectNodeDropProps = function collectNodeDropProps(monitor) {
 	    return {
-	        connectDropTarget: connect.dropTarget(),
 	        canDrop: monitor.canDrop(),
 	        isDropping: monitor.isOver({ shallow: true }) && monitor.canDrop()
 	    };
 	};
-	var DroppableTreeViewInsertTarget = exports.DroppableTreeViewInsertTarget = (0, _reactDnd.DropTarget)([_DraggedNode.TYPE], nodeTarget, collectNodeDropProps)(TreeViewInsertTarget);
+	function DroppableTreeViewInsertTarget(props) {
+	    var _useDrop = (0, _reactDnd.useDrop)({
+	        accept: _DraggedNode.TYPE,
+	        collect: collectNodeDropProps,
+	        drop: function drop(item, monitor) {
+	            return monitor.didDrop() ? undefined // some child already handled drop
+	            : handleDrop(item, monitor, props);
+	        },
+	        canDrop: function canDrop(item, monitor) {
+	            return handleCanDrop(item, monitor, props);
+	        }
+	    }),
+	        _useDrop2 = _slicedToArray(_useDrop, 2),
+	        _useDrop2$ = _useDrop2[0],
+	        canDrop = _useDrop2$.canDrop,
+	        isDropping = _useDrop2$.isDropping,
+	        dropRef = _useDrop2[1];
+	
+	    return _react2.default.createElement(
+	        "div",
+	        { ref: dropRef, style: Object.assign({}, props.insertBefore ? _InsertTarget.Styles.insertBeforeTarget : _InsertTarget.Styles.insertAfterTarget, canDrop ? _InsertTarget.Styles.insertTargetCanDrop : {}, isDropping ? _InsertTarget.Styles.insertTargetDropping : {}) },
+	        _react2.default.createElement("div", { style: isDropping ? _InsertTarget.Styles.insertTargetMarkerDropping : {} })
+	    );
+	}
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	
@@ -174,9 +183,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	});
 	var TYPE = exports.TYPE = "TreeNode";
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	"use strict";
 	
@@ -238,22 +247,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	    Styles.insertTargetMarkerDropping = NormalStyles.insertTargetMarkerDropping;
 	})(Styles || (exports.Styles = Styles = {}));
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.TreeViewItemList = exports.DraggableTreeViewItem = undefined;
 	
-	var _immutable = __webpack_require__(8);
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 	
-	var _immutable2 = _interopRequireDefault(_immutable);
+	exports.DraggableTreeViewItem = DraggableTreeViewItem;
+	exports.TreeViewItemList = TreeViewItemList;
 	
-	var _classnames2 = __webpack_require__(9);
+	var _classnames2 = __webpack_require__(8);
 	
 	var _classnames3 = _interopRequireDefault(_classnames2);
 	
@@ -271,10 +280,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
-	var TreeViewItem = function TreeViewItem(props) {
-	    return props.connectDragSource(_react2.default.createElement(
+	var EMPTY_NODELIST = [];
+	var gatherNodeIDs = function gatherNodeIDs(node) {
+	    var nodeIDs = new Set([node.id]);
+	    if (node.children) {
+	        node.children.forEach(function (node) {
+	            return gatherNodeIDs(node).forEach(function (id) {
+	                return nodeIDs.add(id);
+	            });
+	        });
+	    }
+	    return nodeIDs;
+	};
+	var collectNodeDragProps = function collectNodeDragProps(monitor) {
+	    return {
+	        isDragging: monitor.isDragging()
+	    };
+	};
+	function DraggableTreeViewItem(props) {
+	    var _useDrag = (0, _reactDnd.useDrag)({
+	        item: {
+	            type: _DraggedNode.TYPE,
+	            node: props.node,
+	            allSourceIDs: gatherNodeIDs(props.node),
+	            parentNode: props.parentNode,
+	            parentChildIndex: props.parentChildIndex,
+	            precedingNode: props.precedingNode
+	        },
+	        collect: collectNodeDragProps
+	    }),
+	        _useDrag2 = _slicedToArray(_useDrag, 2),
+	        isDragging = _useDrag2[0].isDragging,
+	        dragRef = _useDrag2[1];
+	
+	    return _react2.default.createElement(
 	        "div",
-	        { className: (0, _classnames3.default)(props.classNames.node, _defineProperty({}, props.classNames.nodeDragging, props.isDragging)), key: props.node.id },
+	        { ref: dragRef, className: (0, _classnames3.default)(props.classNames.node, _defineProperty({}, props.classNames.nodeDragging, isDragging)), key: props.node.id },
 	        _react2.default.createElement(
 	            "div",
 	            null,
@@ -283,46 +324,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	        props.node.isCollapsed ? null : _react2.default.createElement(
 	            "div",
 	            { className: props.classNames.nodeChildren },
-	            props.node.children && !props.node.children.items.isEmpty() ? _react2.default.createElement(TreeViewItemList, { parentNode: props.node, nodes: props.node.children ? props.node.children : { items: _immutable2.default.List() }, classNames: props.classNames, renderNode: props.renderNode, onMoveNode: props.onMoveNode }) : _react2.default.createElement(_InsertTarget.DroppableTreeViewInsertTarget, { insertBefore: false, parentNode: props.node, parentChildIndex: 0, precedingNode: null, onMoveNode: props.onMoveNode })
+	            props.node.children && props.node.children.length > 0 ? _react2.default.createElement(TreeViewItemList, { parentNode: props.node, nodes: props.node.children ? props.node.children : EMPTY_NODELIST, classNames: props.classNames, renderNode: props.renderNode, onMoveNode: props.onMoveNode }) : _react2.default.createElement(_InsertTarget.DroppableTreeViewInsertTarget, { insertBefore: false, parentNode: props.node, parentChildIndex: 0, precedingNode: null, onMoveNode: props.onMoveNode })
 	        )
-	    ));
-	};
-	var gatherNodeIDs = function gatherNodeIDs(node) {
-	    return _immutable2.default.Set.of(node.id).union(node.children ? node.children.items.flatMap(gatherNodeIDs) : _immutable2.default.List()).toSet();
-	};
-	var nodeSource = {
-	    beginDrag: function beginDrag(props, monitor, component) {
-	        return {
-	            node: props.node,
-	            allSourceIDs: gatherNodeIDs(props.node),
-	            parentNode: props.parentNode,
-	            parentChildIndex: props.parentChildIndex,
-	            precedingNode: props.precedingNode
-	        };
-	    }
-	};
-	var collectNodeDragProps = function collectNodeDragProps(connect, monitor) {
-	    return {
-	        connectDragSource: connect.dragSource(),
-	        isDragging: monitor.isDragging()
-	    };
-	};
-	var DraggableTreeViewItem = exports.DraggableTreeViewItem = (0, _reactDnd.DragSource)(_DraggedNode.TYPE, nodeSource, collectNodeDragProps)(TreeViewItem);
+	    );
+	}
 	var nodesWithPredecessors = function nodesWithPredecessors(nodes) {
-	    return nodes.toIndexedSeq().zipWith(function (node, predecessor) {
-	        return { node: node, precedingNode: predecessor };
-	    }, _immutable2.default.Seq.of(null).concat(nodes));
+	    return nodes.map(function (node, index) {
+	        return { node: node, precedingNode: nodes[index - 1] };
+	    });
 	};
 	// TODO: add a mechanism to apply the CSS equivalent:
 	// .nodePositioningWrapper:hover {
 	//   /* otherwise drop targets interfere with drag start */
 	//   z-index: 2;
 	// }
-	var TreeViewItemList = exports.TreeViewItemList = function TreeViewItemList(props) {
+	function TreeViewItemList(props) {
 	    return _react2.default.createElement(
 	        "div",
 	        { className: props.classNames.nodeList },
-	        nodesWithPredecessors(props.nodes.items).map(function (node, index) {
+	        nodesWithPredecessors(props.nodes).map(function (node, index) {
 	            return _react2.default.createElement(
 	                "div",
 	                { key: node.node.id, style: { position: "relative" }, className: props.classNames.nodePositioningWrapper },
@@ -332,21 +352,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	            );
 	        })
 	    );
-	};
+	}
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	module.exports = __WEBPACK_EXTERNAL_MODULE_9__;
-
-/***/ }
+/***/ })
 /******/ ])
 });
 ;

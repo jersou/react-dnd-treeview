@@ -1,7 +1,4 @@
-import Immutable from "immutable";
-import React from "react";
-
-export type TreeNodeID = string;
+export type TreeNodeID = string | number;
 
 export interface TreeNode {
   readonly id: TreeNodeID;
@@ -9,9 +6,7 @@ export interface TreeNode {
   readonly children?: TreeNodeList;
 }
 
-export interface TreeNodeList {
-  readonly items: Immutable.Iterable<number, TreeNode>;
-}
+export type TreeNodeList = TreeNode[];
 
 export interface MoveTreeNodeArgs {
   oldParentNode: TreeNode;
@@ -38,9 +33,7 @@ export interface TreeViewClassNames {
 
 export interface TreeViewProps {
   readonly rootNodes: TreeNodeList;
-
   readonly classNames: TreeViewClassNames;
-
   readonly renderNode: (node: TreeNode) => JSX.Element;
   readonly onMoveNode: MoveTreeNode;
 }

@@ -1,12 +1,11 @@
-import Immutable from "immutable";
-
-import { TreeNode, TreeNodeID } from "./react-dnd-treeview.d.ts";
+import { TreeNode, TreeNodeID } from "./react-dnd-treeview";
 
 export const TYPE = "TreeNode";
 
 export interface DraggedNode {
+  type: string;
   node: TreeNode;
-  allSourceIDs: Immutable.Set<TreeNodeID>;
+  allSourceIDs: Set<TreeNodeID>;
   parentNode: TreeNode;
   parentChildIndex: number;
   precedingNode: TreeNode;
