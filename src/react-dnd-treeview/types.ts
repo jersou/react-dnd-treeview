@@ -3,7 +3,7 @@ export type TreeNodeID = string | number;
 export type TreeNode = {
   readonly id: TreeNodeID;
   title: string;
-  isCollapsed?: boolean;
+  isExpanded?: boolean;
   children?: TreeNode[];
 };
 

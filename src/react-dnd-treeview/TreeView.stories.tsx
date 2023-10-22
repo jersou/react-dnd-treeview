@@ -1,7 +1,7 @@
 import "./styles.css";
-import { Treeview } from "./Treeview.tsx";
+import { TreeView } from "./TreeView.tsx";
 
-export default { title: "TreeView/demo", component: Treeview };
+export default { title: "TreeView/demo", component: TreeView };
 
 const initNodes = [
   {
@@ -40,4 +40,4 @@ const initNodes = [
   },
 ];
 
-export const exemple = () => <Treeview initNodes={initNodes}></Treeview>;
+export const exemple = () => <TreeView initNodes={initNodes}></TreeView>;
