@@ -1,9 +1,8 @@
-import { DragSourceMonitor, useDrag } from "react-dnd";
-import { DraggedNode, MoveTreeNode, TreeNode, TYPE } from "./types";
+import { MoveTreeNode, TreeNode } from "./types";
 import { InsertTarget } from "./InsertTarget";
 import { TreeViewItemList } from "./TreeViewItemList.tsx";
-import { gatherNodeIDs } from "./node-utils.ts";
 import { ReactElement } from "react";
+import { useDragNode } from "./UseDragNode.tsx";
 
 export function DraggableTreeViewItem(props: {
   parentNode: TreeNode | undefined;
@@ -12,18 +11,10 @@ export function DraggableTreeViewItem(props: {
   renderNode: (node: TreeNode) => ReactElement;
   onMoveNode: MoveTreeNode;
 }) {
-  const [{ isDragging }, dragRef] = useDrag({
-    type: TYPE,
-    collect: (monitor: DragSourceMonitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-    item: {
-      type: TYPE,
-      node: props.node,
-      allSourceIDs: gatherNodeIDs(props.node),
-      parentNode: props.parentNode,
-      parentChildIndex: props.parentChildIndex,
-    } as DraggedNode,
+  const { isDragging, dragRef } = useDragNode({
+    node: props.node,
+    parentNode: props.parentNode,
+    parentChildIndex: props.parentChildIndex,
   });
 
   return (

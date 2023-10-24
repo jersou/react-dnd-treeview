@@ -40,4 +40,4 @@ const initNodes = [
   },
 ];
 
-export const exemple = () => <TreeView initNodes={initNodes}></TreeView>;
+export const Exemple = () => <TreeView initNodes={initNodes}></TreeView>;

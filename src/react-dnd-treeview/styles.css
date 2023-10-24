@@ -1,6 +1,5 @@
-
 .nodePositioningWrapper {
-    position: relative
+    position: relative;
 }
 
 .node {
@@ -52,7 +51,12 @@
 }
 
 .collapseLink {
-    vertical-align: middle;
+    padding: 2px;
+    /*cursor: pointer;*/
+}
+
+.collapseLink.expanded {
+    transform: rotate(90deg);
 }
 
 .nodeDropping {
@@ -61,4 +65,29 @@
 
 .selected {
     background-color: #91d3ff;
+}
+
+.NodeActions {
+    margin-left: 10px;
+}
+
+.RenderNode {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    padding: 2px;
+}
+
+.RenderNodeContainer {
+    display: flex;
+}
+
+.nodeEditor {
+    display: flex;
+    font-size: 1.2em;
+}
+
+.nodeEditor > input {
+    flex: 1;
+    background-color: #ffca8e;
 }
